@@ -18,7 +18,7 @@ calculate_product() {
   num1=$2
   num=$(echo "$1" | tr ':' '=')
 
-  result=$(echo "$num2 > $num1" | bc)
+  result=$(echo "if($num2 > $num1) 1 else 0" | bc)
   if ((result == 1)); then
     numcp=$num1
     num1=$num2
@@ -32,8 +32,8 @@ if [ $# -ne 1 ]; then
   echo 'Usage: factorize <file>'
   exit 1
 else
-  while read -r line; do
-    result=$(factor "$line")
+  while read -r number; do
+    result=$(factor "$number")
     calculate_product $result
   done < "$1"
 fi
