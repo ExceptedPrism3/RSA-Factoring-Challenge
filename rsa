@@ -1,32 +1,24 @@
 #!/usr/bin/python3
+"""
+Choji Alexander Pam
+"""
 
-# library get arguments
 import sys
+from math import ceil, sqrt
 
-# fn unpack number factorial
-def fc():
-    """
-    function fc to search file to convert number and format n=p*q
-    """
-    try:
-        revfile = sys.argv[1]
-        with open(revfile) as f1:
-            for revnumber in f1:
-                revnumber = int(revnumber)
-                if revnumber % 2 == 0:
-                        print("{}={}*{}".format(revnumber, revnumber // 2, 2))
-                        continue
-                i = 3
-                while i < revnumber // 2:
-                    if revnumber % i == 0:
-                        print("{}={}*{}".format(revnumber, revnumber // i1, i1))
-                        break
-                    i1 = i1 + 2
-                if i1 == (revnumber // 2) + 1:
-                    print("{}={}*{}".format(revnumber, revnumber, 1))
-    except (IndexError):
-        pass
-
-
-# autostart
-fc()
+with open(sys.argv[1], "r") as fp:
+    n = int(fp.readline())
+    # check if value is even
+    if n % 2 == 0:
+        print("{}={}*{}".format(n, int(n / 2), 2))
+    # value is odd number
+    else:
+        a = int(ceil(sqrt(n)))
+        while (True):
+            b1 = a * a - n
+            b = int(sqrt(b1))
+            if(b * b == b1):
+                break
+            else:
+                a += 1
+        print("{}={}*{}".format(n, a + b, a - b))
