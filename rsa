@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 
-# library to get arguments
+# library get arguments
 import sys
-
 
 # fn unpack number factorial
 def fc():
@@ -11,8 +10,8 @@ def fc():
     """
     try:
         revfile = sys.argv[1]
-        with open(revfile) as f:
-            for revnumber in f:
+        with open(revfile) as f1:
+            for revnumber in f1:
                 revnumber = int(revnumber)
                 if revnumber % 2 == 0:
                         print("{}={}*{}".format(revnumber, revnumber // 2, 2))
@@ -20,10 +19,10 @@ def fc():
                 i = 3
                 while i < revnumber // 2:
                     if revnumber % i == 0:
-                        print("{}={}*{}".format(revnumber, revnumber // i, i))
+                        print("{}={}*{}".format(revnumber, revnumber // i1, i1))
                         break
-                    i = i + 2
-                if i == (revnumber // 2) + 1:
+                    i1 = i1 + 2
+                if i1 == (revnumber // 2) + 1:
                     print("{}={}*{}".format(revnumber, revnumber, 1))
     except (IndexError):
         pass
