@@ -1,48 +1,31 @@
-#!/usr/bin/env bash
-#is a challenge
-check_factor()
-{
-	if [ $# -ne 3 ];
-        then
-                args=("$@")
-                count=0
-                num2=1
-                for a in ${args[*]};
-                do
-                        if [ $count -gt 1 ];
-                        then
-                                num2=$(echo $a*$num2 | bc)
-                        fi
-                        count=$((count + 1))
-                done
-        else
-                num2=$3
-        fi
+#!/usr/bin/python3
 
-        num1=$2
-        num=$(echo "$1" | tr ':' '=')
+import sys
 
-        result=$(echo "if($num2 > $num1) 1 else 0" | bc)
-	        if ((result == 1)); then
-		        numcp=$num1
-		        num1=$num2
-		        num2=$numcp
-                fi
 
-        echo "$num$num1*$num2"
-}
+def factor(line):
+    number = int(line)
+    value = 0
+    if number < 4:
+        print("{:d}={:d}*1".format(number, number))
+        return
+    for i in range(2, number):
+        if number % i == 0:
+            value = number // i
+            break
+    print("{:d}={:d}*{:d}".format(number, value, i))
 
-if [ $# -ne 1 ]
-then
-        echo 'Usage: rsa <file>'
-        exit 1
-else
 
-        while read i
-        do
+if len(sys.argv) != 2:
+    print("Usage: factors <file>")
+    sys.exit()
+filename = sys.argv[1]
+try:
+    test = open(filename, "r")
+except FileNotFoundError:
+    print("Error: Can't open file <{:s}>".format(filename))
+    sys.exit()
+line = test.read()
+factor(line)
 
-                result=$(factor "$i")
-                check_factor $result
-
-        done < "$1"
-fi
+test.close()
